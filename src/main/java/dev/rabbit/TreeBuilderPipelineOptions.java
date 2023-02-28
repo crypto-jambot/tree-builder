@@ -14,7 +14,7 @@ public interface TreeBuilderPipelineOptions extends GcpOptions {
     void setGcpProject(String value);
 
     @Required
-    @Default.String("SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths`")
+    @Default.String("SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths` LIMIT 1")
     ValueProvider<String> getQueryString();
 
     void setQueryString(ValueProvider<String> value);
