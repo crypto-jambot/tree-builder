@@ -9,5 +9,5 @@ environment:
 parameters:
   gcpProject: crypto-351521
   queryString: SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths`
-  shardNumber: 10000
+  shardNumber: 2000
   gcsBucket: gs://crypto-351521-ethereum-trees

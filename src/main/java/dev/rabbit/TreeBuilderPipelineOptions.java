@@ -20,7 +20,7 @@ public interface TreeBuilderPipelineOptions extends GcpOptions {
     void setQueryString(ValueProvider<String> value);
 
     @Required
-    @Default.Integer(10000)
+    @Default.Integer(2000)
     ValueProvider<Integer> getShardNumber();
 
     void setShardNumber(ValueProvider<Integer> value);
