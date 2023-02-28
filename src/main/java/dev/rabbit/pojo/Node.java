@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 @Getter
@@ -22,5 +23,14 @@ public class Node implements Serializable {
                 (String) nodeMap.get("symbol"),
                 (String) nodeMap.get("address"),
                 nodeMap.get("decimals") != null ? Integer.parseInt((String) nodeMap.get("decimals")) : 0);
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("symbol", symbol);
+        map.put("address", address);
+        map.put("decimals", decimals);
+        return map;
     }
 }

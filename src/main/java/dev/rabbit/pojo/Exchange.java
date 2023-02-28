@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
 
 @Getter
@@ -21,5 +22,13 @@ public class Exchange implements Serializable {
                 (String) exchangeMap.get("name"),
                 Integer.parseInt((String) exchangeMap.get("fee")),
                 (String) exchangeMap.get("pool"));
+    }
+
+    public Map<String, Object> toMap() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("fee", fee);
+        map.put("pool", pool);
+        return map;
     }
 }

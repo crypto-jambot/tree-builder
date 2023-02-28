@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,6 +24,14 @@ public class Swap implements Serializable {
     public static <K, V> Swap of(Map<K, V> swapMap) {
         List<Exchange> exchanges = ((List<Map<String, Object>>) swapMap.get("exchanges")).stream().map(Exchange::of).collect(Collectors.toList());
         return new Swap(exchanges, (boolean) swapMap.get("ordered"));
+    }
+
+    public Map<String, Object> toMap() {
+        List<Map<String, Object>> exchangesField = exchanges.stream().map(Exchange::toMap).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("exchanges", exchangesField);
+        map.put("ordered", ordered);
+        return map;
     }
 
     public boolean containsPool(String pool) {
