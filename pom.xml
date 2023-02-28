@@ -4,7 +4,7 @@
 
     <groupId>dev.rabbit</groupId>
     <artifactId>tree-builder</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
 
     <packaging>jar</packaging>
 
@@ -22,7 +22,7 @@
         <connection>scm:git:${connection}</connection>
         <developerConnection>scm:git:${connection}</developerConnection>
         <url>${connection}</url>
-        <tag>HEAD</tag>
+        <tag>tree-builder-1.0.1</tag>
     </scm>
 
     <build>
