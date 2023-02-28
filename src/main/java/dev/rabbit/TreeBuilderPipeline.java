@@ -7,6 +7,7 @@ import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.transforms.MapElements;
 import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.transforms.Reshuffle;
 import org.apache.beam.sdk.values.TypeDescriptors;
 
 public class TreeBuilderPipeline {
@@ -21,6 +22,7 @@ public class TreeBuilderPipeline {
                         .withTemplateCompatibility()
                         .usingStandardSql())
                 .apply("Build Trees", ParDo.of(BuildTrees.of()))
+                .apply("Break Fusion", Reshuffle.viaRandomKey())
                 .apply("Map to JSON", MapElements.into(TypeDescriptors.strings()).via(Mapper.INSTANCE::toJsonString))
                 .apply("Write to GCS", TextIO.write().to(options.getGcsBucket()).withNumShards(options.getShardNumber()).withSuffix(".jsonl"));
 
