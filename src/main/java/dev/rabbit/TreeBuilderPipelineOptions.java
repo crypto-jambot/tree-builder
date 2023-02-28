@@ -26,7 +26,7 @@ public interface TreeBuilderPipelineOptions extends GcpOptions {
     void setShardNumber(ValueProvider<Integer> value);
 
     @Required
-    @Default.String("crypto-351521-ethereum-trees")
+    @Default.String("gs://crypto-351521-ethereum-trees")
     ValueProvider<String> getGcsBucket();
 
     void setGcsBucket(ValueProvider<String> value);

@@ -22,7 +22,7 @@ public class TreeBuilderPipeline {
                         .usingStandardSql())
                 .apply("Build Trees", ParDo.of(BuildTrees.of()))
                 .apply("Map to JSON", MapElements.into(TypeDescriptors.strings()).via(Mapper.INSTANCE::toJsonString))
-                .apply("Write to GCS", TextIO.write().to("gs://resolved-trees/trees").withNumShards(options.getShardNumber()).withSuffix(".jsonl"));
+                .apply("Write to GCS", TextIO.write().to(options.getGcsBucket()).withNumShards(options.getShardNumber()).withSuffix(".jsonl"));
 
         pipeline.run();
     }
