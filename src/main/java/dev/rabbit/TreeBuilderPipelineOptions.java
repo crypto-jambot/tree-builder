@@ -1,0 +1,33 @@
+package dev.rabbit;
+
+import org.apache.beam.sdk.extensions.gcp.options.GcpOptions;
+import org.apache.beam.sdk.options.Default;
+import org.apache.beam.sdk.options.ValueProvider;
+
+import static org.apache.beam.sdk.options.Validation.Required;
+
+public interface TreeBuilderPipelineOptions extends GcpOptions {
+    @Required
+    @Default.String("crypto-351521")
+    ValueProvider<String> getGcpProject();
+
+    void setGcpProject(ValueProvider<String> value);
+
+    @Required
+    @Default.String("SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths` LIMIT 1000")
+    ValueProvider<String> getQueryString();
+
+    void setQueryString(ValueProvider<String> value);
+
+    @Required
+    @Default.Integer(1000)
+    ValueProvider<Integer> getShardNumber();
+
+    void setShardNumber(ValueProvider<Integer> value);
+
+    @Required
+    @Default.String("crypto-351521-ethereum-trees")
+    ValueProvider<String> getGcsBucket();
+
+    void setGcsBucket(ValueProvider<String> value);
+}
