@@ -16,7 +16,7 @@ public class TreeBuilderPipeline {
 
         Pipeline pipeline = Pipeline.create(options);
 
-        String mongoUri = "mongodb://jam:" + SecretManagerUtils.of().accessSecretVersionString(options.getGcpProject(), "mongo-password") + "@71.34.15.187:27017/ethereum?authSource=admin";
+        String mongoUri = "mongodb://jam:" + SecretManagerUtils.of().accessSecretVersionString(options.getGcpProject(), "mongo-password") + "@sellsdev.com/ethereum?authSource=admin";
 
         pipeline.apply("Query for path data", BigQueryIO.readTableRows()
                         .fromQuery(options.getQueryString())
