@@ -9,25 +9,25 @@ import static org.apache.beam.sdk.options.Validation.Required;
 public interface TreeBuilderPipelineOptions extends GcpOptions {
     @Required
     @Default.String("crypto-351521")
-    ValueProvider<String> getGcpProject();
+    String getGcpProject();
 
-    void setGcpProject(ValueProvider<String> value);
+    void setGcpProject(String value);
 
     @Required
-    @Default.String("SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths` LIMIT 1000")
+    @Default.String("SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths`")
     ValueProvider<String> getQueryString();
 
     void setQueryString(ValueProvider<String> value);
 
     @Required
-    @Default.Integer(2000)
-    ValueProvider<Integer> getShardNumber();
+    @Default.String("ethereum")
+    String getDatabase();
 
-    void setShardNumber(ValueProvider<Integer> value);
+    void setDatabase(String value);
 
     @Required
-    @Default.String("gs://crypto-351521-ethereum-trees")
-    ValueProvider<String> getGcsBucket();
+    @Default.String("backfill-trees")
+    String getCollection();
 
-    void setGcsBucket(ValueProvider<String> value);
+    void setCollection(String value);
 }

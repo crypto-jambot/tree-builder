@@ -5,9 +5,11 @@ import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class Tree implements Serializable {
 
@@ -71,6 +73,16 @@ public class Tree implements Serializable {
         } else {
             this.swap = swap;
         }
+    }
+
+    public Map<String, Object> toMap() {
+        List<Map<String, Object>> childrenField = this.children.stream().map(Tree::toMap).collect(Collectors.toList());
+        Map<String, Object> map = new HashMap<>();
+        map.put("node", this.node.toMap());
+        map.put("swap", this.swap.toMap());
+        map.put("children", childrenField);
+
+        return map;
     }
 
     public static Tree getTreeWithRootNode(Node node, List<Tree> trees) {
