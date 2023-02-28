@@ -2,7 +2,6 @@ package dev.rabbit.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import org.apache.commons.collections4.MapUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
