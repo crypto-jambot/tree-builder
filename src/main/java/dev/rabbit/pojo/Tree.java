@@ -2,6 +2,7 @@ package dev.rabbit.pojo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import org.apache.commons.collections4.MapUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class Tree implements Serializable {
         List<Map<String, Object>> childrenField = this.children.stream().map(Tree::toMap).collect(Collectors.toList());
         Map<String, Object> map = new HashMap<>();
         map.put("node", this.node.toMap());
-        map.put("swap", this.swap.toMap());
+        map.put("swap", this.swap != null ? this.swap.toMap() : null);
         map.put("children", childrenField);
 
         return map;
