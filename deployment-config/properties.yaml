@@ -1,6 +1,6 @@
 environment:
   numWorkers: 1
-  maxWorkers: 1
+  maxWorkers: 3
   tempLocation: gs://tree-builder-dfjob/temp
   ipConfiguration: WORKER_IP_UNSPECIFIED
   serviceAccountEmail: tree-builder@crypto-351521.iam.gserviceaccount.com
@@ -10,4 +10,4 @@ parameters:
   gcpProject: crypto-351521
   queryString: SELECT * FROM `crypto-351521.ethereum_v2.refined_pools_with_paths`
   shardNumber: 1000
-  gcpBucket: crypto-351521-ethereum-trees
+  gcsBucket: gs://crypto-351521-ethereum-trees
