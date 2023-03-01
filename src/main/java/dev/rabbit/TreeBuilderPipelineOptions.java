@@ -30,4 +30,10 @@ public interface TreeBuilderPipelineOptions extends GcpOptions {
     String getCollection();
 
     void setCollection(String value);
+
+    @Required
+    @Default.Integer(500)
+    Integer getMongoBatchSize();
+
+    void setMongoBatchSize(Integer value);
 }
