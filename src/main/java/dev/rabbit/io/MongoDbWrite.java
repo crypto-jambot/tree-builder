@@ -1,15 +1,20 @@
 package dev.rabbit.io;
 
 import com.mongodb.ConnectionString;
+import com.mongodb.MongoBulkWriteException;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ServerApi;
 import com.mongodb.ServerApiVersion;
+import com.mongodb.bulk.BulkWriteError;
+import com.mongodb.bulk.BulkWriteResult;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.InsertManyOptions;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -20,9 +25,11 @@ import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Builder
 @Getter
+@Slf4j
 public class MongoDbWrite extends PTransform<PCollection<Document>, PDone> {
 
     private String uri;
@@ -83,7 +90,19 @@ public class MongoDbWrite extends PTransform<PCollection<Document>, PDone> {
             if (this.batch.isEmpty()) return;
             MongoDatabase mongoDatabase = client.getDatabase(this.spec.database);
             MongoCollection<Document> mongoCollection = mongoDatabase.getCollection(this.spec.collection);
-            mongoCollection.insertMany(this.batch);
+            try {
+                mongoCollection.insertMany(this.batch, new InsertManyOptions().ordered(false));
+            } catch (MongoBulkWriteException mongoBulkWriteException) {
+                List<BulkWriteError> bulkWriteErrors = mongoBulkWriteException.getWriteErrors()
+                        .stream().filter(bulkWriteError -> bulkWriteError.getCode() == 11000).collect(Collectors.toList());
+                if (bulkWriteErrors.size() > 0) {
+                    bulkWriteErrors.forEach(bulkWriteError -> {
+                        log.warn(bulkWriteError.getMessage());
+                    });
+                } else {
+                    throw mongoBulkWriteException;
+                }
+            }
             this.batch.clear();
         }
 
