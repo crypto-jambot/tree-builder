@@ -26,7 +26,7 @@ public interface TreeBuilderPipelineOptions extends GcpOptions {
     void setDatabase(String value);
 
     @Required
-    @Default.String("backfill-trees")
+    @Default.String("backfill_trees")
     String getCollection();
 
     void setCollection(String value);
