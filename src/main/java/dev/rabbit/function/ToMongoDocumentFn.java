@@ -17,14 +17,11 @@ public class ToMongoDocumentFn extends SimpleFunction<TreeList, Document> {
     public Document apply(TreeList input) {
         Document doc = new Document();
         doc.append("_id", input.getPool());
-
         List<Document> treeDocuments = new ArrayList<>();
         input.getTrees().forEach(tree -> {
             treeDocuments.add(new Document(tree.toMap()));
         });
-
         doc.append("trees", treeDocuments);
-
         return doc;
     }
 }
