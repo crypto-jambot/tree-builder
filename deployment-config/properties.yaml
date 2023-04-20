@@ -1,6 +1,7 @@
 environment:
   numWorkers: 1
-  maxWorkers: 5
+  maxWorkers: 10
+  machineType: n2-standard-2
   tempLocation: gs://tree-builder-dfjob/temp
   ipConfiguration: WORKER_IP_UNSPECIFIED
   serviceAccountEmail: tree-builder@crypto-351521.iam.gserviceaccount.com
