@@ -55,10 +55,10 @@ jobs:
           artifactId=$(mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout)
           version=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
           gsutil cp -r deployment-config/properties.yaml ${{ secrets.BUCKET }}/templates/$artifactId/$version/App/
-#      - name: Setup git config
-#        run: |
-#          git config user.name "GitHub Actions Bot"
-#          git config user.email "actions@github.com"
+      - name: Setup git config
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
 #      - name: Release
 #        run: |
 #          mvn versions:set -DnewVersion='${project.version}-SNAPSHOT'
