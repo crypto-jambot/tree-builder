@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import org.apache.arrow.flatbuf.Int;
 import org.springframework.util.ObjectUtils;
 
 import java.io.Serializable;
