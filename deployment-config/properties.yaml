@@ -1,6 +1,6 @@
 environment:
   numWorkers: 1
-  maxWorkers: 2
+  maxWorkers: 5
   machineType: n2-standard-2
   tempLocation: gs://tree-builder-dfjob/temp
   ipConfiguration: WORKER_IP_UNSPECIFIED
