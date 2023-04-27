@@ -16,12 +16,14 @@ public class Exchange implements Serializable {
     private final String name;
     private final int fee;
     private final String pool;
+    private final int tickSpacing;
 
     public static <K, V> Exchange of(Map<K, V> exchangeMap) {
         return new Exchange(
                 (String) exchangeMap.get("name"),
                 Integer.parseInt((String) exchangeMap.get("fee")),
-                (String) exchangeMap.get("pool"));
+                (String) exchangeMap.get("pool"),
+                (int) exchangeMap.get("tickSpacing"));
     }
 
     public Map<String, Object> toMap() {
@@ -29,6 +31,7 @@ public class Exchange implements Serializable {
         map.put("name", name);
         map.put("fee", fee);
         map.put("pool", pool);
+        map.put("tickSpacing", tickSpacing);
         return map;
     }
 }
